@@ -5,25 +5,25 @@ import styled from 'styled-components';
 
 const StyledButton = styled.button`
   background-color: #FFDE02;
-  font-weight: bold;
   color: black;
   border-radius: 17px;
-  font-size: 1rem;
-  padding: 7px;
+  font-size: 1.5rem;
+  padding: 10px;
   cursor: pointer;
   border: 1px solid #C8A331;
+  &:focus {
+    outline: none
+  }
 `;
 
-const Button = ({ props }) => {
-  console.log(props)
+const Button = props => {
   const handleClick = () => {
     props.inProgress(true);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         pos => {
           const { latitude, longitude } = pos.coords;
-          props.inProgress(false);
-          props.changeLocation({ latitude, longitude });
+          props.setWeather({ latitude, longitude });
         },
         () => {
           props.inProgress(false);
@@ -31,8 +31,9 @@ const Button = ({ props }) => {
       );
     } else {
       axios.get('http://localhost:8085/api/ip').then(r => {
-        const { ip } = r.data;
-        props.changeIp(ip);
+        // const { ip } = r.data;
+        // props.changeIp(ip); find loc by ip
+        props.changeFinishSt(true)
         props.inProgress(false);
       });
     }

@@ -1,27 +1,27 @@
 import { connect } from 'react-redux';
 
-import changeUserIp from '../store/actions/changeUserIp';
-import changeUserLoc from '../store/actions/changeUserLoc';
+import setWeather from '../store/actions/setWeather';
 import toggleProgress from '../store/actions/toggleProgress';
+import changeFinish from '../store/actions/changeFinish'
 
-import ButtonComponent from '../components/Button.js';
+import ButtonComponent from '../components/Button';
 
 const mapDispatchToProps = dispatch => ({
-  changeIp: ip => {
-    dispatch(changeUserIp(ip));
+  changeFinishSt: st => {
+    dispatch(changeFinish(st));
   },
-  changeLocation: loc => {
-    dispatch(changeUserLoc(loc));
+  setWeather: pos => {
+    dispatch(setWeather(pos));
   },
   inProgress: bool => {
     dispatch(toggleProgress(bool));
   },
-});
-const mapStateToProps = ({ user }) => ({
-  user,
+
 });
 
+
+
 export const Button = connect(
-  mapStateToProps,
+  () => ({}),
   mapDispatchToProps
 )(ButtonComponent);

@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import user from './user.js';
-import appState from './appState.js';
+import appState from './appState';
+import weather from './weather';
 
 export default combineReducers({
-  user,
-  appState
+  appState,
+  weather,
 });
