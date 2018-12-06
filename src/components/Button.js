@@ -17,8 +17,9 @@ const StyledButton = styled.button`
 `;
 
 const Button = props => {
-  const handleClick = () => {
+  const handleClick = (event) => {
     props.inProgress(true);
+    console.log(event)
     props.appState('Ищем Вас')
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -31,15 +32,10 @@ const Button = props => {
         }
       );
     } else {
-      axios.get('http://localhost:8085/api/ip').then(r => {
-        // const { ip } = r.data;
-        // props.changeIp(ip); find loc by ip
-        props.changeFinishSt(true)
-        props.inProgress(false);
-      });
+      alert('Геолокация недоступна.')
     }
   };
-  return <StyledButton onClick={handleClick} onTouchStart={handleClick}> Как погодка? </StyledButton>
+  return <StyledButton onClick={handleClick('click')} onTouchStart={handleClick('touch')}> Как погодка? </StyledButton>
 };
 
 export default Button;
