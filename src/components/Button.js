@@ -19,7 +19,6 @@ const StyledButton = styled.a`
 const Button = props => {
   const handleClick = (event) => {
     props.inProgress(true);
-    console.log(event, props)
     props.appState('Ищем Вас')
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(

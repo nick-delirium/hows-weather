@@ -55,7 +55,6 @@ const weatherIconPath = (name) => {
 
 const ListEl = ({ props }) => (
   <List>
-  {console.log(props)}
   {props.map((day, i) => (
     <ListItem key={i}>
       <Card>
