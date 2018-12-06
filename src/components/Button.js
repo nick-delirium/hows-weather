@@ -1,9 +1,8 @@
 import React from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 
 
-const StyledButton = styled.button`
+const StyledButton = styled.a`
   background-color: #FFDE02;
   color: black;
   border-radius: 17px;
@@ -17,7 +16,7 @@ const StyledButton = styled.button`
 `;
 
 const Button = props => {
-  const handleClick = () => {
+  const handleClick = (event) => {
     props.inProgress(true);
     props.appState('Ищем Вас')
     if (navigator.geolocation) {
@@ -31,12 +30,7 @@ const Button = props => {
         }
       );
     } else {
-      axios.get('/api/ip').then(r => {
-        // const { ip } = r.data;
-        // props.changeIp(ip); find loc by ip
-        props.changeFinishSt(true)
-        props.inProgress(false);
-      });
+      alert('Геолокация недоступна.')
     }
   };
   return <StyledButton onClick={handleClick} onTouchStart={handleClick}> Как погодка? </StyledButton>
