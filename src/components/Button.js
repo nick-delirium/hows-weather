@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 
-const StyledButton = styled.button`
+const StyledButton = styled.a`
   background-color: #FFDE02;
   color: black;
   border-radius: 17px;
@@ -35,7 +35,7 @@ const Button = props => {
       alert('Геолокация недоступна.')
     }
   };
-  return <StyledButton onClick={handleClick('click')} onTouchStart={handleClick('touch')}> Как погодка? </StyledButton>
+  return <StyledButton onClick={handleClick} onTouchStart={handleClick}> Как погодка? </StyledButton>
 };
 
 export default Button;
