@@ -26,6 +26,7 @@ const Button = props => {
           props.setWeather({ latitude, longitude });
         },
         () => {
+          alert('Геолокация недоступна.')
           props.inProgress(false);
         }
       );
