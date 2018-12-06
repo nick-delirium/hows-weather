@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const axios = require('axios');
+const PORT = process.env.PORT || 8085;
 const weatherApi = 'https://www.metaweather.com/api/location';
 app.use(express.static(path.join(__dirname, "dist")));
 
@@ -30,6 +31,6 @@ app.get("/api/weather", (req, res) => {
   .catch(e => console.error(e));
 })
 
-app.listen(process.env.PORT || 8085, () => {
-  console.log("hello, server is live")
+app.listen(PORT, () => {
+  console.log(`hello, server is live @localhost:${PORT} with ${process.env.NODE_ENV || 'development'} mode`)
 });

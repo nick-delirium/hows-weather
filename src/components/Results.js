@@ -18,7 +18,7 @@ const Results = props => (
     <Card>
       <TodayWeather props={props.weather[0]} />
     </Card>
-    <List props={[...props.weather.slice(1,5)]} />
+    <List props={[...props.weather.slice(1)]} />
   </Container>
 );
 

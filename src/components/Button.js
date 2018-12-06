@@ -19,7 +19,7 @@ const StyledButton = styled.button`
 const Button = props => {
   const handleClick = () => {
     props.inProgress(true);
-    props.appState('Ищем вас')
+    props.appState('Ищем Вас')
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         pos => {

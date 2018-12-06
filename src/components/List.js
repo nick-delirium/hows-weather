@@ -6,9 +6,10 @@ import Card from './Card';
 
 const List = styled.ul`
   display: grid;
+  padding-left: 0;
   justify-content: center;
   list-style: none;
-  grid-template-columns: repeat(auto-fill, 265px);
+  grid-template-columns: repeat(auto-fill, 350px);
   grid-auto-flow: dense;
   grid-auto-rows: auto;
   grid-gap: 8px;
@@ -18,6 +19,11 @@ const ListItem = styled.li`
   grid-row: span 1;
   border-radius: 10px;
   font-size: 1.1rem;
+  max-width: 90vw;
+  @media only screen and (max-width: 764px) {
+    margin: 0 auto;
+    width: 100%;
+  }
 `;
 const LeftCol = styled.div`
   width: 25%;
@@ -38,6 +44,9 @@ const RightCol = styled.div`
   width: 25%;
   order: 3;
   text-align: center;
+  p {
+    margin-top: 0px;
+  }
 `;
 
 const weatherIconPath = (name) => {
@@ -59,7 +68,7 @@ const ListEl = ({ props }) => (
         </CenterCol>
         <RightCol>
           <img src={weatherIconPath(day.weather_state_abbr)} alt={day.weather_state_name} width='32px'/>
-          {day.the_temp.toFixed(1)}°C
+          <p>{day.the_temp.toFixed(1)}°C</p>
         </RightCol>
       </Card>
     </ListItem>
