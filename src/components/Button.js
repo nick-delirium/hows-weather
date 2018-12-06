@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 
 
@@ -27,6 +26,7 @@ const Button = props => {
           props.setWeather({ latitude, longitude });
         },
         () => {
+          alert('Геолокация недоступна.')
           props.inProgress(false);
         }
       );
