@@ -33,7 +33,7 @@ const Button = props => {
       alert('Геолокация недоступна.')
     }
   };
-  return <StyledButton onClick={handleClick} onTouchStart={handleClick}> Как погодка? </StyledButton>
+  return <StyledButton onClick={handleClick}> Как погодка? </StyledButton>
 };
 
 export default Button;
