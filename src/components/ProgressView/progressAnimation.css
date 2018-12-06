@@ -1,10 +1,10 @@
 .lds-ellipsis {
   display: inline-block;
+  width: 64px;
+  height: 64px;
   position: fixed;
   top: calc(50% - 32px);
   left: calc(50% - 32px);
-  width: 64px;
-  height: 64px;
 }
 .lds-ellipsis div {
   position: absolute;

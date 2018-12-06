@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Button } from './containers/Button';
 import { Results } from './containers/Results';
-import ProgressView from './components/ProgressView';
+import { ProgressView } from './containers/ProgressView';
 
 const Layout = styled.div`
   background: linear-gradient(to right, purple, #ff93a6);
@@ -20,13 +20,13 @@ class App extends React.Component {
   render() {
     return (
       <Layout>
-        {this.props.appState.finished ? <Results /> : <Button />}
+        {this.props.appState.finished && this.props.weather.length > 0 ? <Results /> : <Button />}
         {this.props.appState.progress && <ProgressView />}
       </Layout>
     );
   }
 }
 
-const mapStateToProps = ({ appState }) => ({ appState });
+const mapStateToProps = ({ appState, weather }) => ({ appState, weather });
 
 export default connect(mapStateToProps)(App);
