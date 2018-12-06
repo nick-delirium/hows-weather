@@ -4,7 +4,7 @@ const app = express();
 const axios = require('axios');
 const PORT = process.env.PORT || 8085;
 const weatherApi = 'https://www.metaweather.com/api/location';
-app.use(express.static(path.join(__dirname, "dist")));
+app.use(express.static(path.join(__dirname, "build")));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
