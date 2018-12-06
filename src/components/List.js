@@ -27,7 +27,7 @@ const ListItem = styled.li`
 `;
 const LeftCol = styled.div`
   width: 25%;
-  order:1;
+  order: 1;
   text-align: center;
 `;
 const CenterCol = styled.div`
@@ -49,34 +49,50 @@ const RightCol = styled.div`
   }
 `;
 
-const weatherIconPath = (name) => {
-  return `https://www.metaweather.com/static/img/weather/${name}.svg`
-}
+const weatherIconPath = name => `https://www.metaweather.com/static/img/weather/${name}.svg`;
 
+// strange eslint behaviour here, .map is method, not prop and props is already destructured
 const ListEl = ({ props }) => (
   <List>
-  {props.map((day, i) => (
-    <ListItem key={i}>
-      <Card>
-        <LeftCol>
-          {day.applicable_date}
-        </LeftCol>
-        <CenterCol>
-          <p> от {day.min_temp.toFixed(1)}°C до {day.max_temp.toFixed(1)}°C </p>
-          <p> Ветер {(day.wind_speed * 0.44704).toFixed(1) }м/с </p>
-        </CenterCol>
-        <RightCol>
-          <img src={weatherIconPath(day.weather_state_abbr)} alt={day.weather_state_name} width='32px'/>
-          <p>{day.the_temp.toFixed(1)}°C</p>
-        </RightCol>
-      </Card>
-    </ListItem>
-  ))}
+    {props.map(day => (
+      <ListItem key={day.id}>
+        <Card>
+          <LeftCol>
+            {day.applicable_date}
+          </LeftCol>
+          <CenterCol>
+            <p>
+              от
+              {day.min_temp.toFixed(1)}
+              °C до
+              {day.max_temp.toFixed(1)}
+              °C
+            </p>
+            <p>
+              Ветер
+              {(day.wind_speed * 0.44704).toFixed(1)}
+              м/с
+            </p>
+          </CenterCol>
+          <RightCol>
+            <img
+              src={weatherIconPath(day.weather_state_abbr)}
+              alt={day.weather_state_name}
+              width="32px"
+            />
+            <p>
+              {day.the_temp.toFixed(1)}
+              °C
+            </p>
+          </RightCol>
+        </Card>
+      </ListItem>
+    ))}
   </List>
-)
+);
 
 ListEl.propTypes = {
-  props: PropTypes.arrayOf(PropTypes.object).isRequired
-}
+  props: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default ListEl;

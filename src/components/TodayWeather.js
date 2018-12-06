@@ -36,20 +36,23 @@ const PlacedSpan = styled.span`
   font-size: ${props => (props.small ? '0.8rem' : '1.2rem')};
   padding: ${props => (props.padding ? '5px' : '5px 5px 0px')};
 `;
-const weatherIconPath = name => {
-  return `https://www.metaweather.com/static/img/weather/${name}.svg`;
-};
 
-const getRussianDirection = dir => {
+const weatherIconPath = name => `https://www.metaweather.com/static/img/weather/${name}.svg`;
+
+const getRussianDirection = (dir) => {
   if (dir > 315 || (dir < 45 && dir >= 0)) {
     return 'северный';
-  } else if (dir > 45 && dir < 135) {
+  }
+  if (dir > 45 && dir < 135) {
     return 'восточный';
-  } else if (dir > 135 && dir < 225) {
+  }
+  if (dir > 135 && dir < 225) {
     return 'южный';
-  } else if (dir > 225 && dir < 315) {
+  }
+  if (dir > 225 && dir < 315) {
     return 'западный';
   }
+  return '???';
 };
 const monthNames = [
   'Январь',
@@ -67,41 +70,65 @@ const monthNames = [
 ];
 const d = new Date();
 
-const TodayWeather = ({ props }) => (
+const TodayWeather = ({
+  min_temp,
+  max_temp,
+  the_temp,
+  weather_state_abbr,
+  weather_state_name,
+  wind_direction,
+  wind_speed,
+  humidity,
+  air_pressure,
+  predictability,
+}) => (
   <TodayLayout>
     <CenterCol>
       <PlacedDiv center>
         <PlacedSpan padding>
-          {monthNames[d.getMonth()]}, {d.getDate()}
+          {monthNames[d.getMonth()]}
+          ,
+          {d.getDate()}
         </PlacedSpan>
       </PlacedDiv>
       <p>
-        Сегодня температура будет от {props.min_temp.toFixed(1)}
-        °C и до {props.max_temp.toFixed(1)}
-        °C.{' '}
+        Сегодня температура будет от
+        {min_temp.toFixed(1)}
+        °C и до
+        {max_temp.toFixed(1)}
+        °C.
       </p>
       <p>
-        Ветер {getRussianDirection(props.wind_direction)}, {(props.wind_speed * 0.44704).toFixed(1)}
-        м/с.{' '}
+        Ветер
+        {getRussianDirection(wind_direction)}
+        ,
+        {(wind_speed * 0.44704).toFixed(1)}
+        м/с.
       </p>
       <p>
-        Влажность: {props.humidity}
-        %, давление воздуха: {(props.air_pressure * 0.750062).toFixed(1)}
+        Влажность:
+        {humidity}
+        %, давление воздуха:
+        {(air_pressure * 0.750062).toFixed(1)}
         мм рт ст.
       </p>
       <PlacedDiv align="right">
-        <PlacedSpan small>Точность прогноза: {props.predictability}%</PlacedSpan>
+        <PlacedSpan small>
+          Точность прогноза:
+          {predictability}
+          %
+        </PlacedSpan>
       </PlacedDiv>
     </CenterCol>
     <RightCol>
       <div>
         <img
-          src={weatherIconPath(props.weather_state_abbr)}
-          alt={props.weather_state_name}
+          src={weatherIconPath(weather_state_abbr)}
+          alt={weather_state_name}
           width="32px"
         />
         <p>
-          {props.the_temp.toFixed(1)}
+          {the_temp.toFixed(1)}
           °C
         </p>
       </div>
@@ -110,23 +137,16 @@ const TodayWeather = ({ props }) => (
 );
 
 TodayWeather.propTypes = {
-  props: PropTypes.shape({
-    id: PropTypes.number,
-    weather_state_name: PropTypes.string,
-    weather_state_abbr: PropTypes.string,
-    wind_direction_compass: PropTypes.string,
-    created: PropTypes.string,
-    applicable_date: PropTypes.string,
-    min_temp: PropTypes.number,
-    max_temp: PropTypes.number,
-    the_temp: PropTypes.number,
-    wind_speed: PropTypes.number,
-    wind_direction: PropTypes.number,
-    air_pressure: PropTypes.number,
-    humidity: PropTypes.number,
-    visibility: PropTypes.number,
-    predictability: PropTypes.number,
-  }),
+  weather_state_name: PropTypes.string.isRequired,
+  weather_state_abbr: PropTypes.string.isRequired,
+  min_temp: PropTypes.number.isRequired,
+  max_temp: PropTypes.number.isRequired,
+  the_temp: PropTypes.number.isRequired,
+  wind_speed: PropTypes.number.isRequired,
+  wind_direction: PropTypes.number.isRequired,
+  air_pressure: PropTypes.number.isRequired,
+  humidity: PropTypes.number.isRequired,
+  predictability: PropTypes.number.isRequired,
 };
 
 export default TodayWeather;

@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import ProgressBackground from './ProgressBackground';
 import ProgressIcon from './ProgressIcon';
-import ProgressText from './ProgressText'
+import ProgressText from './ProgressText';
 
 const Centered = styled.div`
   position: fixed;
@@ -12,15 +13,21 @@ const Centered = styled.div`
   width: 100%;
 `;
 
-const ProgressView = props => (
+const ProgressView = ({ appState }) => (
   <ProgressBackground>
     <ProgressIcon />
     <Centered>
-      {props.appState.state.map((event, i) => (
+      {appState.state.map((event, i) => (
         <ProgressText key={i}>{event}</ProgressText>
       ))}
     </Centered>
   </ProgressBackground>
 );
+
+ProgressView.propTypes = ({
+  appState: PropTypes.shape({
+    state: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
+});
 
 export default ProgressView;

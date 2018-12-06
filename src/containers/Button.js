@@ -2,30 +2,27 @@ import { connect } from 'react-redux';
 
 import setWeather from '../store/actions/setWeather';
 import toggleProgress from '../store/actions/toggleProgress';
-import changeFinish from '../store/actions/changeFinish'
+import changeFinish from '../store/actions/changeFinish';
 import changeAppState from '../store/actions/changeAppState';
 
 import ButtonComponent from '../components/Button';
 
 const mapDispatchToProps = dispatch => ({
-  changeFinishSt: st => {
+  changeFinishSt: (st) => {
     dispatch(changeFinish(st));
   },
-  appState: str => {
-    dispatch(changeAppState(str))
+  appState: (str) => {
+    dispatch(changeAppState(str));
   },
-  setWeather: pos => {
+  setWeather: (pos) => {
     dispatch(setWeather(pos));
   },
-  inProgress: bool => {
+  inProgress: (bool) => {
     dispatch(toggleProgress(bool));
   },
-
 });
 
-
-
-export const Button = connect(
+export default connect(
   () => ({}),
-  mapDispatchToProps
+  mapDispatchToProps,
 )(ButtonComponent);

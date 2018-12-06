@@ -6,7 +6,4 @@ const mapStateToProps = ({ weather, appState }) => ({
   appState,
 });
 
-
-export const Results = connect(
-  mapStateToProps
-)(ResultsComponent);
+export default connect(mapStateToProps)(ResultsComponent);

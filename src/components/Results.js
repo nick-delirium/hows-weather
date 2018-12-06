@@ -11,18 +11,22 @@ const Container = styled.div`
   text-align: center;
 `;
 
-
-const Results = props => (
+const Results = ({ appState, weather }) => (
   <Container>
-    <h2> {props.appState.city} </h2>
+    <h2>
+      {appState.city}
+    </h2>
     <Card>
-      <TodayWeather props={props.weather[0]} />
+      <TodayWeather {...weather[0]} />
     </Card>
-    <List props={[...props.weather.slice(1)]} />
+    <List props={[...weather.slice(1)]} />
   </Container>
 );
 
 Results.propTypes = {
+  appState: PropTypes.shape({
+    city: PropTypes.string.isRequired,
+  }).isRequired,
   weather: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
