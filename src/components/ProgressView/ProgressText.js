@@ -15,10 +15,7 @@ const ProgressText = ({ children }) => (
 );
 
 ProgressText.propTypes = ({
-  children: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.object,
-  ]).isRequired,
+  children: PropTypes.string.isRequired,
 });
 
 export default ProgressText;
