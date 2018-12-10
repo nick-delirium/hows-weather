@@ -26,13 +26,13 @@ export default function setWeather(pos) {
   return (dispatch) => {
     dispatch({ type: 'CHANGE_APP_STATE', payload: 'Определяем город' });
     axios
-      .get(`/api/city?lat=${pos.latitude}&long=${pos.longitude}`)
+      .get(`http://localhost:8085/api/city?lat=${pos.latitude}&long=${pos.longitude}`)
       .then((r) => {
         const cityId = r.data[0].woeid;
         dispatch({ type: 'CHANGE_CITY', payload: r.data[0].title });
         dispatch({ type: 'CHANGE_APP_STATE', payload: 'Спрашиваем погоду у местных' });
         axios
-          .get(`/api/weather?city=${cityId}`)
+          .get(`http://localhost:8085/api/weather?city=${cityId}`)
           .then((w) => {
             const consolidated_weather = w.data;
             const weatherList = consolidated_weather.map((day) => {

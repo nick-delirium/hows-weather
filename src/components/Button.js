@@ -15,32 +15,15 @@ const StyledButton = styled.a`
   }
 `;
 
-const Button = ({ inProgress, appState, setWeather }) => {
+const Button = ({ findWeather }) => {
   const handleClick = () => {
-    inProgress(true);
-    appState('Ищем Вас');
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          const { latitude, longitude } = pos.coords;
-          setWeather({ latitude, longitude });
-        },
-        () => {
-          alert('Геолокация недоступна.');
-          inProgress(false);
-        },
-      );
-    } else {
-      alert('Геолокация недоступна.');
-    }
+    findWeather();
   };
   return <StyledButton onClick={handleClick}> Как погодка? </StyledButton>;
 };
 
 Button.propTypes = ({
-  inProgress: PropTypes.func.isRequired,
-  appState: PropTypes.func.isRequired,
-  setWeather: PropTypes.func.isRequired,
+  findWeather: PropTypes.func.isRequired,
 });
 
 export default Button;

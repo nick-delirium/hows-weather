@@ -14,7 +14,6 @@ const List = styled.ul`
   grid-auto-rows: auto;
   grid-gap: 8px;
 `;
-
 const ListItem = styled.li`
   grid-row: span 1;
   border-radius: 10px;
