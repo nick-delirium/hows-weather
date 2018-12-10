@@ -6,6 +6,11 @@ import changeAppState from '../store/actions/changeAppState';
 
 import ButtonComponent from '../components/Button';
 
+const throwFail = (dsptch, progress, str) => {
+  alert(str);
+  dsptch(progress(false));
+};
+
 const mapDispatchToProps = dispatch => ({
   findWeather: () => {
     dispatch(toggleProgress(true));
@@ -18,12 +23,11 @@ const mapDispatchToProps = dispatch => ({
           dispatch(setWeather({ latitude, longitude }));
         },
         () => {
-          alert('Геолокация недоступна.');
-          dispatch(toggleProgress(false));
+          throwFail(dispatch, toggleProgress, 'Геолокация недоступна или отключена в настройках браузера');
         },
       );
     } else {
-      alert('Геолокация недоступна.');
+      throwFail(dispatch, toggleProgress, 'Геолокация недоступна.');
     }
   },
 });
