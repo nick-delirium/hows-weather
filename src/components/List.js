@@ -49,7 +49,7 @@ const RightCol = styled.div`
 `;
 
 const weatherIconPath = name => `https://www.metaweather.com/static/img/weather/${name}.svg`;
-
+/* eslint-disable */
 // strange eslint behaviour here, .map is method, not prop and props is already destructured
 const ListEl = ({ props }) => (
   <List>
