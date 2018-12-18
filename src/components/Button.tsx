@@ -1,6 +1,5 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 const StyledButton = styled.a`
   background-color: #ffde02;
@@ -15,15 +14,15 @@ const StyledButton = styled.a`
   }
 `;
 
-const Button = ({ findWeather }) => {
+export interface Props {
+  findWeather: Function
+}
+
+const Button: React.SFC<Props> = ({ findWeather }) => {
   const handleClick = () => {
     findWeather();
   };
   return <StyledButton onClick={handleClick}> Как погодка? </StyledButton>;
 };
-
-Button.propTypes = ({
-  findWeather: PropTypes.func.isRequired,
-});
 
 export default Button;

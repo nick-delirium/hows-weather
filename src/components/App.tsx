@@ -1,6 +1,5 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import Button from '../containers/Button';
 import Results from '../containers/Results';
@@ -16,19 +15,18 @@ const Layout = styled.div`
   font-size: calc(10px + 2vmin);
 `;
 
-const App = ({ appState, weather }) => (
+
+export interface Props {
+  appState: { finished: boolean, progress: boolean },
+  weather: Array<object>,
+}
+
+
+const App: React.SFC<Props> = ({ appState, weather }) => (
   <Layout>
     {appState.finished && weather.length > 0 ? <Results /> : <Button />}
     {appState.progress && <ProgressView />}
   </Layout>
 );
-
-App.propTypes = ({
-  appState: PropTypes.shape({
-    finished: PropTypes.bool,
-    progress: PropTypes.bool,
-  }).isRequired,
-  weather: PropTypes.arrayOf(PropTypes.object).isRequired,
-});
 
 export default App;

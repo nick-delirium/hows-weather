@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import styled from 'styled-components';
 
 const TodayLayout = styled.div`
@@ -29,17 +28,17 @@ const RightCol = styled.div`
     }
   }
 `;
-const PlacedDiv = styled.div`
+const PlacedDiv = styled("div")<{ center?: boolean}>`
   text-align: ${props => (props.center ? 'center' : 'right')};
 `;
-const PlacedSpan = styled.span`
+const PlacedSpan = styled("span")<{ small?: boolean, padding?: boolean}>`
   font-size: ${props => (props.small ? '0.8rem' : '1.2rem')};
   padding: ${props => (props.padding ? '5px' : '5px 5px 0px')};
 `;
 
-const weatherIconPath = name => `https://www.metaweather.com/static/img/weather/${name}.svg`;
+const weatherIconPath = (name: string): string => `https://www.metaweather.com/static/img/weather/${name}.svg`;
 
-const getRussianDirection = (dir) => {
+const getRussianDirection = (dir: number): string => {
   if (dir > 315 || (dir < 45 && dir >= 0)) {
     return 'северный';
   }
@@ -54,7 +53,7 @@ const getRussianDirection = (dir) => {
   }
   return '???';
 };
-const monthNames = [
+const monthNames: string[] = [
   'Январь',
   'Февраль',
   'Март',
@@ -70,7 +69,20 @@ const monthNames = [
 ];
 const d = new Date();
 
-const TodayWeather = ({
+export interface Props {
+  min_temp: number,
+  max_temp: number,
+  the_temp: number,
+  weather_state_abbr: string,
+  weather_state_name: string,
+  wind_direction: number,
+  wind_speed: number,
+  humidity: number,
+  air_pressure: number,
+  predictability: number
+}
+
+const TodayWeather: React.SFC<Props> = ({
   min_temp,
   max_temp,
   the_temp,
@@ -112,7 +124,7 @@ const TodayWeather = ({
         {(air_pressure * 0.750062).toFixed(1)}
         мм рт ст.
       </p>
-      <PlacedDiv align="right">
+      <PlacedDiv>
         <PlacedSpan small>
           Точность прогноза:
           {predictability}
@@ -135,18 +147,5 @@ const TodayWeather = ({
     </RightCol>
   </TodayLayout>
 );
-
-TodayWeather.propTypes = {
-  weather_state_name: PropTypes.string.isRequired,
-  weather_state_abbr: PropTypes.string.isRequired,
-  min_temp: PropTypes.number.isRequired,
-  max_temp: PropTypes.number.isRequired,
-  the_temp: PropTypes.number.isRequired,
-  wind_speed: PropTypes.number.isRequired,
-  wind_direction: PropTypes.number.isRequired,
-  air_pressure: PropTypes.number.isRequired,
-  humidity: PropTypes.number.isRequired,
-  predictability: PropTypes.number.isRequired,
-};
 
 export default TodayWeather;

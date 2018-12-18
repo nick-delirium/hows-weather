@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 const Card = styled.div`
   background-color: white;
@@ -14,17 +13,14 @@ const Card = styled.div`
   flex: 1;
 `;
 
-const CardEl = ({ children }) => (
+export interface Props {
+  children: Array<React.ReactElement<any>> | React.ReactElement<any>
+}
+
+const CardEl: React.SFC<Props> = ({ children }) => (
   <Card>
     {children}
   </Card>
 );
-
-CardEl.propTypes = ({
-  children: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.object,
-  ]).isRequired,
-});
 
 export default CardEl;

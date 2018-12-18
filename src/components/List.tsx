@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import Card from './Card';
 
@@ -48,10 +47,28 @@ const RightCol = styled.div`
   }
 `;
 
-const weatherIconPath = name => `https://www.metaweather.com/static/img/weather/${name}.svg`;
+const weatherIconPath = (name: string): string => `https://www.metaweather.com/static/img/weather/${name}.svg`;
+
+export interface Props {
+  props: Array<{
+    id: number,
+    min_temp: number,
+    max_temp: number,
+    the_temp: number,
+    weather_state_abbr: string,
+    weather_state_name: string,
+    wind_direction: number,
+    wind_speed: number,
+    humidity: number,
+    air_pressure: number,
+    predictability: number
+    applicable_date: number,
+  }>
+}
+
 /* eslint-disable */
 // strange eslint behaviour here, .map is method, not prop and props is already destructured
-const ListEl = ({ props }) => (
+const ListEl: React.SFC<Props> = ({ props }) => (
   <List>
     {props.map(day => (
       <ListItem key={day.id}>
@@ -89,9 +106,5 @@ const ListEl = ({ props }) => (
     ))}
   </List>
 );
-
-ListEl.propTypes = {
-  props: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
 
 export default ListEl;

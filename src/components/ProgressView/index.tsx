@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import ProgressBackground from './ProgressBackground';
 import ProgressIcon from './ProgressIcon';
@@ -13,7 +12,13 @@ const Centered = styled.div`
   width: 100%;
 `;
 
-const ProgressView = ({ appState }) => (
+export interface Props {
+  appState: {
+    state: Array<string>
+  }
+}
+
+const ProgressView: React.SFC<Props> = ({ appState }) => (
   <ProgressBackground>
     <ProgressIcon />
     <Centered>
@@ -23,11 +28,5 @@ const ProgressView = ({ appState }) => (
     </Centered>
   </ProgressBackground>
 );
-
-ProgressView.propTypes = ({
-  appState: PropTypes.shape({
-    state: PropTypes.arrayOf(PropTypes.string),
-  }).isRequired,
-});
 
 export default ProgressView;
